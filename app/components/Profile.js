@@ -2,6 +2,11 @@ import React from 'react';
 import Router from 'react-router';
 
 class Profile extends React.Component {
+{*/
+       getInitialState will actually need to be
+    removed for ES6 classes and set in the constructor, will wait
+    for react router to be updated
+        */}
   getInitialState() {
     return {
       notes: [],
