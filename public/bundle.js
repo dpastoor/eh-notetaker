@@ -62,6 +62,7 @@
 
 	//instead of a static main component have a root component
 	// so whenever a route changes it will detect that and pass the component we want to render
+
 	_reactRouter2['default'].run(_configRoutes2['default'], function (Root) {
 		_react2['default'].render(_react2['default'].createElement(Root, null), document.getElementById('app'));
 	});
@@ -23580,7 +23581,12 @@
 
 	exports['default'] =
 	//whenever we hit the root of our app, render the main component
-	_react2['default'].createElement(_reactRouter.Route, { name: 'app', path: '/', handler: _componentsMain2['default'] });
+	_react2['default'].createElement(
+		_reactRouter.Route,
+		{ name: 'app', path: '/', handler: _componentsMain2['default'] },
+		'// default route to go to if no other routes match request',
+		_react2['default'].createElement(_reactRouter.DefaultRoute, { handler: _componentsHome2['default'] })
+	);
 	module.exports = exports['default'];
 
 /***/ },
@@ -23607,6 +23613,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	// for some reason webpack will not render this unless route handler is in { }
+	// probably as it is in react-router.RoutHandler
+
+	var _reactRouter = __webpack_require__(157);
+
 	var Main = (function (_React$Component) {
 		function Main() {
 			_classCallCheck(this, Main);
@@ -23621,8 +23632,21 @@
 			value: function render() {
 				return _react2['default'].createElement(
 					'div',
-					null,
-					'Hello World'
+					{ className: 'main-container' },
+					_react2['default'].createElement(
+						'nav',
+						{ className: 'navbar navbar-default', role: 'navigation' },
+						_react2['default'].createElement(
+							'div',
+							{ className: 'col-sm-7 col-sm-offset-2', style: { marginTop: 15 } },
+							'MENU'
+						)
+					),
+					_react2['default'].createElement(
+						'div',
+						{ className: 'container' },
+						_react2['default'].createElement(_reactRouter.RouteHandler, null)
+					)
 				);
 			}
 		}]);
@@ -23630,8 +23654,14 @@
 		return Main;
 	})(_react2['default'].Component);
 
-	exports.Main = Main;
 	exports['default'] = Main;
+	module.exports = exports['default'];
+	/*
+	//this container will always be shown
+	*/ /*
+	   this is what will be swapped out by the router based on
+	   what child path we hit
+	   */
 
 /***/ },
 /* 198 */
@@ -23671,7 +23701,7 @@
 			value: function render() {
 				return _react2["default"].createElement(
 					"h2",
-					{ classN: true, ame: "text-center" },
+					{ className: "text-center" },
 					"Search by Github Username Above"
 				);
 			}
@@ -23680,8 +23710,8 @@
 		return Home;
 	})(_react2["default"].Component);
 
-	exports.Home = Home;
 	exports["default"] = Home;
+	module.exports = exports["default"];
 
 /***/ }
 /******/ ]);
