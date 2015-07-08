@@ -10,4 +10,4 @@ export class Main extends React.Component {
 	}
 }
 
-React.render(<Main />, document.getElementById('app'));
+export default Main;
